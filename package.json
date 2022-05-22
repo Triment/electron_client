@@ -1,6 +1,6 @@
 {
   "name": "electron-quick-start",
-  "productName": "Teachable Machine",
+  "productName": "AI Trainer",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
@@ -34,7 +34,7 @@
     "forge": {
       "packagerConfig": {
         "icon": "./logo",
-        "name": "Teachable Machine"
+        "name": "AI Trainer"
       },
       "makers": [
         {

@@ -1,16 +1,17 @@
 // Modules to control application life and create native browser window
-const {app,Tray, Menu, BrowserWindow} = require('electron')
+const {app,Tray, Menu, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 //app.dock.bounce()
 //app.dock.setMenu(null)
 //app.dock.setIcon(new Tray(path.join(__dirname,"./logo.png")))
-Menu.setApplicationMenu(null)
+//Menu.setApplicationMenu(null)
+const title = 'AI Trainer'
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1300,
     height: 800,
-    title: 'Teachable Machine',
+    title: title,
     frame: false,
     autoHideMenuBar: true,
     icon: path.join(__dirname, 'logo.png'),
@@ -21,9 +22,14 @@ function createWindow () {
   mainWindow.loadURL('https://train.aimaker.space/train')
   mainWindow.webContents.addListener('page-title-updated', (event, title, explicitSet)=>{
     if (title === '英荔 AI 训练平台 | Teachable Machine'){
-      mainWindow.title = "Teachable Machine"
+      mainWindow.title = title
     }
   })
+  ipcMain.on('close-win', ()=>{
+    mainWindow.close()
+    app.quit()
+  })
+  //mainWindow.webContents.insertCSS(require('fs').readFileSync(path.join(__dirname, 'styles.css')).toString())
   // and load the index.html of the app.
   //mainWindow.loadFile('index.html')
 
